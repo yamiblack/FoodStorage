@@ -2,18 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/navigation_home"
-        android:icon="@drawable/ic_home_black_24dp"
-        android:title="@string/title_home" />
+        android:id="@+id/navigation_storage"
+        android:icon="@drawable/navi_storage"
+        android:title="식량창고" />
 
     <item
-        android:id="@+id/navigation_dashboard"
-        android:icon="@drawable/ic_dashboard_black_24dp"
-        android:title="@string/title_dashboard" />
+        android:id="@+id/navigation_search"
+        android:icon="@drawable/navi_search"
+        android:title="검색" />
 
     <item
-        android:id="@+id/navigation_notifications"
-        android:icon="@drawable/ic_notifications_black_24dp"
-        android:title="@string/title_notifications" />
+        android:id="@+id/navigation_music"
+        android:icon="@drawable/navi_music"
+        android:title="음악" />
+
+    <item
+        android:id="@+id/navigation_mypage"
+        android:icon="@drawable/navi_mypage"
+        android:title="마이페이지" />
 
 </menu>
