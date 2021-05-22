@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="sortingOption">
+        <item>유통기한 순</item>
+        <item>수량 순</item>
+        <item>등록 순</item>
+    </string-array>
+</resources>

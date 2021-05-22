@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+
+    android:layout_height="wrap_content"
+
+    android:textSize="15dp"
+
+    android:textColor="@color/black"
+
+    android:textStyle="bold"
+
+    style="?android:attr/spinnerItemStyle"
+
+    android:paddingTop="4dp"
+
+    android:drawableRight="@drawable/baseline_arrow_drop_down_24">
+
+</TextView>

@@ -21,7 +21,7 @@ import com.google.firebase.auth.FirebaseUser;
 import com.jbnu.software.foodstorage.R;
 
 public class SignupActivity extends Activity {
-    private static final String TAG = "SignUpActivity";
+    private static final String TAG = "SignupActivity";
 
     private FirebaseAuth mAuth;
 
@@ -61,28 +61,25 @@ public class SignupActivity extends Activity {
 
             if (passwordCheck.equals(password)) {
                 mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    startToast("회원가입이 성공적으로 진행됐습니다!");
+                        .addOnCompleteListener(this, task -> {
+                            if (task.isSuccessful()) {
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                startToast("회원가입이 성공적으로 진행됐습니다!");
 
-                                    AlertDialog.Builder ad = new AlertDialog.Builder(SignupActivity.this);
-                                    ad.setTitle("환영합니다!");
-                                    ad.setMessage("가입해주셔서 감사합니다.");
-                                    ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            startActivity(new Intent(getApplicationContext(), LoginActivity.class));
-                                        }
-                                    });
+                                AlertDialog.Builder ad = new AlertDialog.Builder(SignupActivity.this);
+                                ad.setTitle("환영합니다!");
+                                ad.setMessage("가입해주셔서 감사합니다.");
+                                ad.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        startActivity(new Intent(getApplicationContext(), LoginActivity.class));
+                                    }
+                                });
 
-                                    ad.show();
+                                ad.show();
 
-                                } else {
-                                    Log.e(TAG, "createUserWithEmail:failure", task.getException());
-                                }
+                            } else {
+                                Log.e(TAG, "createUserWithEmail:failure", task.getException());
                             }
                         });
 

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "106335970364",
+    "project_id": "foodstorage-2a212",
+    "storage_bucket": "foodstorage-2a212.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:106335970364:android:2b0a71793eb6a981044f39",
+        "android_client_info": {
+          "package_name": "com.jbnu.software.foodstorage"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "106335970364-65qc511fqmm3ujngg094t9q8gh0iul1k.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAaP5UNI_7qONYIfBmXlrH9uMxPCvfJGdo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "106335970364-65qc511fqmm3ujngg094t9q8gh0iul1k.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
