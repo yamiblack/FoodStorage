@@ -27,7 +27,6 @@ public class StorageRecyclerViewAdapter extends RecyclerView.Adapter<StorageRecy
         this.items = items;
     }
 
-
     @NonNull
     @Override
     public StorageRecyclerViewAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -77,7 +76,6 @@ public class StorageRecyclerViewAdapter extends RecyclerView.Adapter<StorageRecy
         Button increment;
         Button decrement;
         Button clear;
-
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -117,6 +115,7 @@ public class StorageRecyclerViewAdapter extends RecyclerView.Adapter<StorageRecy
                         if(position != RecyclerView.NO_POSITION){
                             if(mListener !=null){
                                 mListener.onClearClick(v,position);
+                                notifyItemChanged(position);
                             }
                         }
                 }
@@ -130,6 +129,7 @@ public class StorageRecyclerViewAdapter extends RecyclerView.Adapter<StorageRecy
                     if(position != RecyclerView.NO_POSITION){
                         if(mListener !=null){
                             mListener.onCheckClick(v,position);
+                            notifyItemChanged(position);
                         }
                     }
                 }

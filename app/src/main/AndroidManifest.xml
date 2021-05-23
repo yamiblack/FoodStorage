@@ -14,15 +14,29 @@
         <activity android:name=".MainActivity" />
         <activity android:name=".ui.membership.LoginActivity" />
         <activity android:name=".ui.membership.SignupActivity" />
+        <activity android:name=".SearchActivity" />
 
         <activity
             android:name=".SplashActivity"
             android:theme="@android:style/Theme.NoTitleBar.Fullscreen">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+        </activity>
+
+        <receiver android:name=".AlarmReceiver"
+            android:enabled="true"
+            android:exported="false">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="com.dwfox.myapplication.SEND_BROAD_CAST"/>
+                <action android:name="android.provider.Telephony.SMS_RECEIVED" />
+                <action android:name="my.action.string" />
             </intent-filter>
-        </activity>
+        </receiver>
+
+
     </application>
 
 </manifest>

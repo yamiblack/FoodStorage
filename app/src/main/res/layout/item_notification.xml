@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:id="@+id/item_List"
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerVertical="true"
+            android:orientation="horizontal">
+
+            <TextView
+                android:id="@+id/item_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="이름"
+                android:textColor="@color/black"
+                android:textSize="17sp" />
+
+            <TextView
+                android:id="@+id/item_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBaseline="@id/item_name"
+                android:layout_marginLeft="3dp"
+                android:layout_toRightOf="@+id/item_name"
+                android:text="1"
+                android:textColor="@color/black"
+                android:textSize="13sp" />
+        </LinearLayout>
+
+        <Spinner
+            android:id="@+id/notify_date_spinner"
+            android:layout_width="wrap_content"
+            android:layout_height="43dp"
+            android:textColor="@color/black"
+            android:spinnerMode="dropdown"
+            android:background="@drawable/notification_background"
+            android:layout_toLeftOf="@id/notify_switch"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:gravity="center" />
+
+        <Switch
+            android:id="@+id/notify_switch"
+            android:layout_width="wrap_content"
+            android:layout_height="41dp"
+            android:switchMinWidth="60dp"
+            android:layout_centerVertical="true"
+            android:layout_alignParentRight="true"
+            />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginTop="3dp"
+            android:background="#45B3E0E8" />
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

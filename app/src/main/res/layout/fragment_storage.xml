@@ -65,7 +65,33 @@
         android:dividerHeight="7dp"
         android:scrollbars="vertical"
         app:layout_constraintTop_toBottomOf="@id/option"
-        android:layout_marginTop="7dp"
-        />
+        android:layout_marginTop="7dp">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_NotifyList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:divider="#ffffff"
+        android:dividerHeight="7dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@id/option"
+        android:layout_marginTop="7dp">
+    </androidx.recyclerview.widget.RecyclerView>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab_notification"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:layout_marginRight="20dp"
+        android:backgroundTint="@color/ic_launcher_background"
+        app:tint = "@color/white"
+        android:src="@drawable/ic_notifications_white_24dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:borderWidth="0dp"
+        app:fabSize="normal" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

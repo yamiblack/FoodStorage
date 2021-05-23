@@ -1,14 +1,39 @@
 package com.jbnu.software.foodstorage;
 
 
+import java.io.Serializable;
 import java.util.Calendar;
 
-public class Storage {
+public class Storage implements Serializable {
     String name;
     int amount;
     int dDay;
     String expiration;
     int regTime;
+    boolean expanded;
+    boolean notification;
+    int notifyDate;
+
+    public Storage() {
+        this.notification = true;
+        this.notifyDate = 1;
+    }
+
+    public boolean isNotification() {
+        return notification;
+    }
+
+    public void setNotification(boolean notification) {
+        this.notification = notification;
+    }
+
+    public int getNotifyDate() {
+        return notifyDate;
+    }
+
+    public void setNotifyDate(int notifydate) {
+        this.notifyDate = notifydate;
+    }
 
     public boolean isExpanded() {
         return expanded;
@@ -18,7 +43,7 @@ public class Storage {
         this.expanded = expanded;
     }
 
-    private boolean expanded;
+
 
     public String getName() {
         return name;

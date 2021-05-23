@@ -6,17 +6,59 @@
     android:layout_height="match_parent"
     tools:context=".ui.search.SearchFragment">
 
-    <TextView
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textSize="20sp"
         android:gravity="center"
-        android:text="search test"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:orientation="horizontal"
+        android:padding="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/search_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:gravity="center"
+            android:layout_marginRight="20dp"
+            android:text="품목"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+
+
+        <Button
+            android:id="@+id/search_expiration"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.1"
+            android:gravity="center"
+            android:layout_marginLeft="20dp"
+            android:text="유통기한"
+            android:textColor="@color/black"
+            android:textSize="18sp"/>
+    </LinearLayout>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#45B3E0E8"
+        app:layout_constraintTop_toBottomOf="@id/linearLayout"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_result_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:divider="#ffffff"
+        android:dividerHeight="7dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@id/divider"
+        android:layout_marginTop="7dp"
+        />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
