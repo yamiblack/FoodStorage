@@ -21,10 +21,15 @@ public class AlarmReceiver extends BroadcastReceiver {
     private static String CHANNEL_ID = "channel1";
     private static String CHANNEL_NAME = "Channel1";
 
-
     @Override
     public void onReceive(Context context, Intent intent) {
         AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+
+        String name = intent.getExtras().getString("name");
+        int id = intent.getExtras().getInt("ID");
+        int dDay = intent.getExtras().getInt("DDay");
+        boolean isOn = intent.getExtras().getBoolean("isOn");
+
         builder = null;
         manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
@@ -42,6 +47,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         //알림창 제목
         builder.setContentTitle("유통기한이 임박한 품목이있어요!");
+        builder.setContentText(name + "의 유통기한이 " + dDay + "일 남았어요");
         //알림창 아이콘
         builder.setSmallIcon(R.drawable.ic_logo);
         //알림창 터치시 자동 삭제
@@ -50,15 +56,10 @@ public class AlarmReceiver extends BroadcastReceiver {
         builder.setContentIntent(pendingIntent);
 
         Notification notification = builder.build();
-        manager.notify((int)(System.currentTimeMillis()/1000), notification);
+        manager.notify(id, notification);
 
-//        String action = intent.getAction();
-//
-////        Log.i("Receiver", "Broadcast received: " + action);
-////
-////        if(action.equals("my.action.string")){
-////            int state = intent.getExtras().getInt("extra");
-////            Log.e("e", ""+state);
-////        }
+        if(!isOn)
+            manager.cancel(id);
+
     }
 }

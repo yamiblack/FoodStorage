@@ -6,17 +6,27 @@ import java.util.Calendar;
 
 public class Storage implements Serializable {
     String name;
+    String expiration;
+    String email;
     int amount;
     int dDay;
-    String expiration;
     int regTime;
+    int notifyDate;
     boolean expanded;
     boolean notification;
-    int notifyDate;
+
 
     public Storage() {
         this.notification = true;
         this.notifyDate = 1;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 
     public boolean isNotification() {
@@ -42,8 +52,6 @@ public class Storage implements Serializable {
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
     }
-
-
 
     public String getName() {
         return name;
