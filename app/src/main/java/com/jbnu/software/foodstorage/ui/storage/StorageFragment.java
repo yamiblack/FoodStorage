@@ -98,6 +98,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
                     for (int i = 0; i < arrayListDB.size(); i++) {
                         if (arrayListDB.get(i).isNotification())
                             setAlarm(arrayListDB.get(i));
+                            setStorageListDB(arrayListDB.get(i), 1);
                     }
 
                     getStorageList();
@@ -293,8 +294,8 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
                 data.put("name", storage.getName());
                 data.put("amount", storage.getAmount());
                 data.put("regTime", storage.getRegTime());
-                data.put("notifyDate", storage.getNotifyDate());
                 data.put("notification", storage.isNotification());
+                data.put("notifyDate", storage.getNotifyDate());
                 data.put("expiration", storage.getExpiration());
 
                 db.collection("FoodStorage").document(storage.getName() + storage.getRegTime()).set(data);
@@ -307,16 +308,16 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
 //    public void setTestListDB() {
 //            Map<String, Object> data = new HashMap<>();
 //            data.put("email", auth.getCurrentUser().getEmail());
-//            data.put("name", "콜라");
+//            data.put("name", "우유");
 //            data.put("amount", 3);
 //         //   data.put("dDay", 6);
 //            data.put("regTime", 2);
 //            data.put("notifyDate", 1);
 //            data.put("expanded", false);
 //            data.put("notification", true);
-//            data.put("expiration", "2021.05.33");
+//            data.put("expiration", "2021.05.30");
 //
-//            db.collection("FoodStorage").document("콜라").set(data);
+//            db.collection("FoodStorage").document("우유").set(data);
 ////                    .add(data)
 ////                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
 ////                        @Override

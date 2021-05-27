@@ -7,7 +7,7 @@
 
     android:textSize="15dp"
 
-    android:textColor="@color/black"
+    android:textColor="@color/white"
 
     style="?android:attr/spinnerItemStyle"
 

@@ -131,7 +131,7 @@ public class StorageNotificationRecyclerViewAdapter extends RecyclerView.Adapter
     }
 
     public void setSpinnerDefault(Spinner spinner) {
-        ArrayAdapter nAdapter = ArrayAdapter.createFromResource(context, R.array.notify_date_option, R.layout.spinner_item);
+        ArrayAdapter nAdapter = ArrayAdapter.createFromResource(context, R.array.notify_date_option, R.layout.notification_spinner_item);
         nAdapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(nAdapter);
     }

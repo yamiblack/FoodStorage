@@ -10,7 +10,9 @@
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
         android:orientation="horizontal"
+        android:background="@drawable/background_rounded"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -19,6 +21,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
+            android:layout_marginLeft="10dp"
             android:layout_centerVertical="true"
             android:orientation="horizontal">
 
@@ -27,7 +30,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이름"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="17sp" />
 
             <TextView
@@ -38,7 +41,7 @@
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@+id/item_name"
                 android:text="1"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="13sp" />
         </LinearLayout>
 
@@ -46,19 +49,20 @@
             android:id="@+id/notify_date_spinner"
             android:layout_width="wrap_content"
             android:layout_height="43dp"
-            android:textColor="@color/black"
-            android:spinnerMode="dropdown"
-            android:background="@drawable/notification_background"
-            android:layout_toLeftOf="@id/notify_switch"
             android:layout_centerVertical="true"
             android:layout_marginRight="10dp"
-            android:gravity="center" />
+            android:layout_toLeftOf="@id/notify_switch"
+            android:background="@drawable/notification_background"
+            android:gravity="center"
+            android:spinnerMode="dropdown"
+            android:textColor="@color/white" />
 
         <Switch
             android:id="@+id/notify_switch"
             android:layout_width="wrap_content"
             android:layout_height="41dp"
             android:switchMinWidth="60dp"
+            android:layout_marginRight="10dp"
             android:layout_centerVertical="true"
             android:layout_alignParentRight="true"
             />
