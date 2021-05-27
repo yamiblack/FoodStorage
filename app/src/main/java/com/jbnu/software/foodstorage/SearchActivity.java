@@ -4,13 +4,23 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
 
@@ -27,33 +37,40 @@ public class SearchActivity extends AppCompatActivity {
     private int type;
 
     private Storage testlist;
-    private ArrayList<Storage> dbArrayList;
+    MyCallback myCallback;
+
+    private ArrayList<Storage> arrayListDB;
+    private FirebaseAuth auth;
+    private FirebaseFirestore db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
-        dbArrayList = new ArrayList<Storage>();
-        testlist = new Storage();
-        testlist.setName("우유");
-        testlist.setAmount(1);
-        testlist.setExpiration(2021, 05, 24);
-        testlist.setRegTime(3);
-        dbArrayList.add(testlist);
-        testlist = new Storage();
-        testlist.setName("콜라");
-        testlist.setAmount(3);
-        testlist.setExpiration(2021, 05, 24);
-        testlist.setRegTime(2);
-        dbArrayList.add(testlist);
-        testlist = new Storage();
-        testlist.setName("냉동삼겹살");
-        testlist.setAmount(5);
-        testlist.setExpiration(2022, 07, 23);
-        testlist.setRegTime(1);
-        testlist.setNotification(false);
-        dbArrayList.add(testlist);
+        arrayListDB = new ArrayList<Storage>();
+//        testlist = new Storage();
+//        testlist.setName("우유");
+//        testlist.setAmount(1);
+//        testlist.setExpiration(2021, 05, 24);
+//        testlist.setRegTime(3);
+//        dbArrayList.add(testlist);
+//        testlist = new Storage();
+//        testlist.setName("콜라");
+//        testlist.setAmount(3);
+//        testlist.setExpiration(2021, 05, 24);
+//        testlist.setRegTime(2);
+//        dbArrayList.add(testlist);
+//        testlist = new Storage();
+//        testlist.setName("냉동삼겹살");
+//        testlist.setAmount(5);
+//        testlist.setExpiration(2022, 07, 23);
+//        testlist.setRegTime(1);
+//        testlist.setNotification(false);
+//        dbArrayList.add(testlist);
+
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
 
         Intent intent = getIntent();
         type = intent.getExtras().getInt("search_type");
@@ -62,9 +79,14 @@ public class SearchActivity extends AppCompatActivity {
         rvSearch = (RecyclerView) findViewById(R.id.rv_searchList);
         btnResult = findViewById(R.id.btn_result);
 
-        searchList = new ArrayList<Storage>();
-        searchList.addAll(dbArrayList);
-
+        readData(new MyCallback() {
+            @Override
+            public void onCallback(ArrayList<Storage> eventList) {
+                arrayListDB.addAll(eventList);
+                searchList.addAll(arrayListDB);
+                Log.e("TAG123", arrayListDB.get(0).getName());
+            }
+        });
 
         getSearchList();
 
@@ -91,14 +113,14 @@ public class SearchActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if (type == TYPE_ITEM) {
                     Intent intentR = new Intent();
-                    intentR.putExtra("Result", dbArrayList);
+                    intentR.putExtra("Result", arrayListDB);
                     setResult(RESULT_OK, intentR);
                     finish();
                 }
 
                 if (type == TYPE_EXPIRATION) {
                     Intent intentR = new Intent();
-                    intentR.putExtra("Result", dbArrayList);
+                    intentR.putExtra("Result", arrayListDB);
                     setResult(RESULT_OK, intentR);
                     finish();
                 }
@@ -109,17 +131,17 @@ public class SearchActivity extends AppCompatActivity {
 
     public void search(String charText) {
         if (type == TYPE_ITEM) {
-            dbArrayList.clear();
+            arrayListDB.clear();
 
             if (charText.length() == 0) {
-                dbArrayList.addAll(searchList);
+                arrayListDB.addAll(searchList);
             } else {
 
                 for (int i = 0; i < searchList.size(); i++) {
 
                     if (searchList.get(i).getName().toLowerCase().contains(charText)) {
 
-                        dbArrayList.add(searchList.get(i));
+                        arrayListDB.add(searchList.get(i));
                     }
                 }
             }
@@ -128,17 +150,17 @@ public class SearchActivity extends AppCompatActivity {
         }
 
         if (type == TYPE_EXPIRATION) {
-            dbArrayList.clear();
+            arrayListDB.clear();
 
             if (charText.length() == 0) {
-                dbArrayList.addAll(searchList);
+                arrayListDB.addAll(searchList);
             } else {
 
                 for (int i = 0; i < searchList.size(); i++) {
 
                     if (searchList.get(i).getExpiration().toLowerCase().contains(charText)) {
 
-                        dbArrayList.add(searchList.get(i));
+                        arrayListDB.add(searchList.get(i));
                     }
                 }
             }
@@ -150,13 +172,40 @@ public class SearchActivity extends AppCompatActivity {
 
     public void getSearchList() {
         searchList = new ArrayList<>();
-        searchList.addAll(dbArrayList);
+        searchList.addAll(arrayListDB);
         layoutManager = new LinearLayoutManager(this);
         rvSearch.setLayoutManager(layoutManager);
-        adapter = new SearchRecyclerViewAdapter(this, dbArrayList);
+        adapter = new SearchRecyclerViewAdapter(this, arrayListDB);
         rvSearch.setAdapter(adapter);
+
     }
 
+    public void readData(MyCallback myCallback) {
+        db.collection("FoodStorage").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+
+                    ArrayList<Storage> eventList = new ArrayList<>();
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                        if (documentSnapshot.get("email").equals(auth.getCurrentUser().getEmail())) {
+                            Storage storage = documentSnapshot.toObject(Storage.class);
+                            eventList.add(storage);
+                        }
+
+                    }
+                    adapter.notifyDataSetChanged();
+
+                    myCallback.onCallback(eventList);
+                }
+
+            }
+        });
+    }
+
+    public interface MyCallback {
+        void onCallback(ArrayList<Storage> eventList);
+    }
 
 }
 

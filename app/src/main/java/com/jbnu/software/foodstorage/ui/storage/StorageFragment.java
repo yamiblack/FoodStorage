@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -33,6 +34,7 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.jbnu.software.foodstorage.AlarmReceiver;
 import com.jbnu.software.foodstorage.R;
+import com.jbnu.software.foodstorage.SearchActivity;
 import com.jbnu.software.foodstorage.Storage;
 import com.jbnu.software.foodstorage.StorageNotificationRecyclerViewAdapter;
 import com.jbnu.software.foodstorage.StorageRecyclerViewAdapter;
@@ -67,7 +69,6 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_storage, container, false);
         setHasOptionsMenu(true);
-
         isNotifyView = false;
         itemCount = root.findViewById(R.id.item_count);
         spinner = root.findViewById(R.id.spinner);
@@ -77,30 +78,16 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
         arrayListDB = new ArrayList<>();
-        setTestListDB();
-        db.collection("FoodStorage").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+
+        readData(new MyCallback() {
             @Override
-            public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                if (task.isSuccessful()) {
-                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
-                        if (documentSnapshot.get("email").equals(auth.getCurrentUser().getEmail())) {
-                            Storage storage = documentSnapshot.toObject(Storage.class);
-                            arrayListDB.add(storage);
-                        }
-                    }
-                    adapter.notifyDataSetChanged();
-                    itemCount.setText(Integer.toString(arrayListDB.size()));
-
-                    if (arrayListDB.size() == 0) {
-                        Toast.makeText(getActivity().getApplicationContext(), "현재 냉장고에 아무것도 없어요", Toast.LENGTH_SHORT).show();
-                    }
-                }
-
+            public void onCallback(ArrayList<Storage> eventList) {
+                itemCount.setText(Integer.toString(arrayListDB.size()));
+                addSpinner();
             }
         });
 
         getStorageList();
-        addSpinner();
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -111,9 +98,8 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
                     for (int i = 0; i < arrayListDB.size(); i++) {
                         if (arrayListDB.get(i).isNotification())
                             setAlarm(arrayListDB.get(i));
-                        else ;
                     }
-//                    setAlarm(testArrayList.get(1));
+
                     getStorageList();
                     addSpinner();
 
@@ -129,41 +115,32 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
         return root;
     }
 
+    public void readData(MyCallback myCallback) {
+        db.collection("FoodStorage").get().addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                if (task.isSuccessful()) {
+                    for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
+                        if (documentSnapshot.get("email").equals(auth.getCurrentUser().getEmail())) {
+                            Storage storage = documentSnapshot.toObject(Storage.class);
+                            arrayListDB.add(storage);
+                        }
+                    }
+                    adapter.notifyDataSetChanged();
+                    myCallback.onCallback(arrayListDB);
 
-    @RequiresApi(api = Build.VERSION_CODES.N)
-    private void setAlarm(Storage storage) {
-        alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+                    if (arrayListDB.size() == 0) {
+                        Toast.makeText(getActivity().getApplicationContext(), "현재 냉장고에 아무것도 없어요", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
-        //AlarmReceiver에 값 전달
-        Intent receiverIntent = new Intent(getContext(), AlarmReceiver.class);
-        receiverIntent.putExtra("ID", storage.getRegTime());
-        receiverIntent.putExtra("name", storage.getName());
-        receiverIntent.putExtra("DDay", storage.getDDay());
-        receiverIntent.putExtra("isOn", storage.isNotification());
-
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), storage.getRegTime(), receiverIntent, 0);
-
-        String from = storage.getExpiration() + " 16:00:00";
-        // "2020.05.23 10:31:00"; //임의로 날짜와 시간을 지정
-
-        //날짜 포맷을 바꿔주는 소스코드
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
-        Date datetime = null;
-        try {
-            datetime = dateFormat.parse(from);
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(datetime);
-
-        //알람시간 설정
-        calendar.roll(Calendar.DATE, -storage.getNotifyDate());
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
-
+            }
+        });
     }
 
+    public interface MyCallback {
+        void onCallback(ArrayList<Storage> eventList);
+    }
 
     @Override
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
@@ -209,8 +186,6 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
     }
 
     public void getStorageList() {
-//        arrayList = new ArrayList<>();
-      //  arrayList.addAll(arrayList);
         layoutManager = new LinearLayoutManager(getActivity());
         rvStorage.setLayoutManager(layoutManager);
         adapter = new StorageRecyclerViewAdapter(getActivity(), arrayListDB);
@@ -219,15 +194,22 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
         adapter.setOnItemClickListener(new StorageRecyclerViewAdapter.OnItemClickListener() {
             @Override
             public void onClearClick(View v, int position) {
+                setStorageListDB(arrayListDB.get(position), 2);
                 arrayListDB.remove(position);
+
+                itemCount.setText(Integer.toString(arrayListDB.size()));
                 adapter.notifyDataSetChanged();
             }
 
             @Override
             public void onCheckClick(View v, int position) {
                 arrayListDB.get(position).setAmount(adapter.getExAmount());
+                setStorageListDB(arrayListDB.get(position), 1);
                 arrayListDB.get(position).setExpanded(false);
+
+                itemCount.setText(Integer.toString(arrayListDB.size()));
                 adapter.notifyDataSetChanged();
+
             }
         });
 
@@ -235,12 +217,44 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
 
 
     public void getNotifyList() {
-    //    arrayList = new ArrayList<>();
-      //  arrayList.addAll(arrayList);
         layoutManager = new LinearLayoutManager(getActivity());
         rvStorage.setLayoutManager(layoutManager);
         nAdapter = new StorageNotificationRecyclerViewAdapter(getActivity(), arrayListDB);
         rvStorage.setAdapter(nAdapter);
+
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    private void setAlarm(Storage storage) {
+        alarmManager = (AlarmManager) getContext().getSystemService(Context.ALARM_SERVICE);
+
+        //AlarmReceiver에 값 전달
+        Intent receiverIntent = new Intent(getContext(), AlarmReceiver.class);
+        receiverIntent.putExtra("ID", storage.getRegTime());
+        receiverIntent.putExtra("name", storage.getName());
+        receiverIntent.putExtra("DDay", storage.getDDay());
+        receiverIntent.putExtra("isOn", storage.isNotification());
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), storage.getRegTime(), receiverIntent, 0);
+
+        String from = storage.getExpiration() + " 16:00:00";
+        // "2020.05.23 10:31:00"; //임의로 날짜와 시간을 지정
+
+        //날짜 포맷을 바꿔주는 소스코드
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
+        Date datetime = null;
+        try {
+            datetime = dateFormat.parse(from);
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(datetime);
+
+        //알람시간 설정
+        calendar.roll(Calendar.DATE, -storage.getNotifyDate());
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
 
     }
 
@@ -272,35 +286,51 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-    public void setTestListDB() {
+        public void setStorageListDB(Storage storage, int flag) {
+            if(flag == 1) {
+                Map<String, Object> data = new HashMap<>();
+                data.put("email", storage.getEmail());
+                data.put("name", storage.getName());
+                data.put("amount", storage.getAmount());
+                data.put("regTime", storage.getRegTime());
+                data.put("notifyDate", storage.getNotifyDate());
+                data.put("notification", storage.isNotification());
+                data.put("expiration", storage.getExpiration());
 
-
-            Map<String, Object> data = new HashMap<>();
-            data.put("email", auth.getCurrentUser().getEmail());
-            data.put("name", "콜라");
-            data.put("amount", 3);
-         //   data.put("dDay", 6);
-            data.put("regTime", 2);
-            data.put("notifyDate", 1);
-            data.put("expanded", false);
-            data.put("notification", true);
-            data.put("expiration", "2021.05.33");
-
-            db.collection("FoodStorage").document("콜라").set(data);
-//                    .add(data)
-//                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                        @Override
-//                        public void onSuccess(DocumentReference documentReference) {
-//                        }
-//                    })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                        }
-//                    });
-
-
+                db.collection("FoodStorage").document(storage.getName() + storage.getRegTime()).set(data);
+            }
+            else if (flag == 2) {
+                db.collection("FoodStorage").document(storage.getName() + storage.getRegTime()).delete();
+            }
     }
+
+//    public void setTestListDB() {
+//            Map<String, Object> data = new HashMap<>();
+//            data.put("email", auth.getCurrentUser().getEmail());
+//            data.put("name", "콜라");
+//            data.put("amount", 3);
+//         //   data.put("dDay", 6);
+//            data.put("regTime", 2);
+//            data.put("notifyDate", 1);
+//            data.put("expanded", false);
+//            data.put("notification", true);
+//            data.put("expiration", "2021.05.33");
+//
+//            db.collection("FoodStorage").document("콜라").set(data);
+////                    .add(data)
+////                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+////                        @Override
+////                        public void onSuccess(DocumentReference documentReference) {
+////                        }
+////                    })
+////                    .addOnFailureListener(new OnFailureListener() {
+////                        @Override
+////                        public void onFailure(@NonNull Exception e) {
+////                        }
+////                    });
+//
+//
+//    }
 
     @Override
     public void onClick(View v) {

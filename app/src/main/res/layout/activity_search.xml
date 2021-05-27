@@ -32,7 +32,7 @@
         </Button>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:visibility="invisible"
+            android:visibility="visible"
             android:id="@+id/rv_searchList"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

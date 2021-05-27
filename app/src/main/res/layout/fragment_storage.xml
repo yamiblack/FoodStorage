@@ -26,10 +26,18 @@
             android:id="@+id/item_count"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="3dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp"
             android:text="1"
             android:textColor="#52D7FF"
             />
+                <View
+                    android:layout_width="2dp"
+                    android:layout_height="30dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_toLeftOf="@id/day"
+                    android:background="#45B3E0E8" />
 
         <Spinner
             android:id="@+id/spinner"

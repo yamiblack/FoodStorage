@@ -12,7 +12,7 @@ public class Storage implements Serializable {
     int dDay;
     int regTime;
     int notifyDate;
-    boolean expanded;
+    boolean expanded = false;
     boolean notification;
 
 
@@ -89,7 +89,12 @@ public class Storage implements Serializable {
         return expiration;
     }
 
-    public void setExpiration(int year, int month, int day) {
+    public void setExpiration(String expration) {
+        String[] split = expration.split("\\.");
+        int year = Integer.parseInt(split[0]);
+        int month = Integer.parseInt(split[1]);
+        int day = Integer.parseInt(split[2]);
+
         //JANUARY = 0
         int dDay = registDDay(year, month-1, day);
         String sDDay = Integer.toString(dDay);

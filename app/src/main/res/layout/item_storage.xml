@@ -5,13 +5,17 @@
     android:layout_height="wrap_content">
 
     <RelativeLayout
+
         android:id="@+id/item_List"
         android:layout_width="match_parent"
         android:layout_height="60dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
+        android:layout_marginTop="10dp"
+        android:background="@drawable/background_rounded"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.526"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -20,6 +24,7 @@
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
             android:layout_centerVertical="true"
+            android:layout_marginLeft="10dp"
             android:orientation="horizontal">
 
             <TextView
@@ -27,7 +32,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="이름"
-                android:textColor="@color/black"
+                android:textColor="@android:color/white"
                 android:textSize="17sp" />
 
             <TextView
@@ -38,17 +43,17 @@
                 android:layout_marginLeft="3dp"
                 android:layout_toRightOf="@+id/item_name"
                 android:text="1"
-                android:textColor="@color/black"
-                android:textSize="13sp" />
+                android:textColor="@android:color/white"
+                android:textSize="11sp" />
         </LinearLayout>
 
-        <View
-            android:layout_width="2dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="1dp"
-            android:layout_marginRight="13dp"
-            android:layout_toLeftOf="@id/day"
-            android:background="#45B3E0E8" />
+<!--        <View-->
+<!--            android:layout_width="2dp"-->
+<!--            android:layout_height="60dp"-->
+<!--            android:layout_marginTop="1dp"-->
+<!--            android:layout_marginRight="13dp"-->
+<!--            android:layout_toLeftOf="@id/day"-->
+<!--            android:background="#45B3E0E8" />-->
 
         <LinearLayout
             android:id="@+id/day"
@@ -57,7 +62,8 @@
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
             android:layout_gravity="center"
-            android:layout_marginRight="4dp"
+
+            android:layout_marginRight="8dp"
             android:orientation="vertical">
 
             <RelativeLayout
@@ -77,9 +83,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
-                        android:text="D - "
-                        android:textColor="@color/black"
                         android:layout_marginBottom="3dp"
+                        android:text="D - "
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
 
                     <TextView
@@ -88,7 +94,7 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginBottom="3dp"
-                        android:textColor="@color/black"
+                        android:textColor="@color/white"
                         android:textSize="15sp" />
                 </LinearLayout>
             </RelativeLayout>
@@ -99,17 +105,17 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="2021.07.05"
-                android:textColor="@color/black"
+                android:textColor="@color/white"
                 android:textSize="15sp" />
 
         </LinearLayout>
 
-        <View
-            android:layout_width="match_parent"
-            android:layout_height="2dp"
-            android:layout_alignParentBottom="true"
-            android:layout_marginTop="3dp"
-            android:background="#45B3E0E8" />
+<!--        <View-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="2dp"-->
+<!--            android:layout_alignParentBottom="true"-->
+<!--            android:layout_marginTop="3dp"-->
+<!--            android:background="#45B3E0E8" />-->
     </RelativeLayout>
 
     <RelativeLayout
@@ -133,7 +139,8 @@
                 android:layout_height="wrap_content"
                 android:text="수량"
                 android:textColor="@color/black"
-                android:textSize="17sp"
+                android:layout_marginLeft="15dp"
+                android:textSize="14sp"
                 android:textStyle="bold"
                 android:layout_centerVertical="true">
 
@@ -142,9 +149,9 @@
             <LinearLayout
                 android:id="@+id/counter"
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="35dp"
                 android:orientation="horizontal"
-                android:layout_marginLeft="8dp"
+                android:layout_marginLeft="15dp"
                 android:layout_toRightOf="@+id/amount"
                 android:background="@android:color/white">
 
@@ -185,7 +192,7 @@
                     android:layout_marginLeft="8dp"
                     android:textColor="@color/black"
                     android:text="사용완료"
-                    android:textSize="13sp" >
+                    android:textSize="11sp" >
                 </Button>
 
             </LinearLayout>
