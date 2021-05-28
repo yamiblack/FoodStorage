@@ -20,6 +20,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.jbnu.software.foodstorage.MainActivity;
 import com.jbnu.software.foodstorage.R;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -74,22 +76,19 @@ public class AddStorageActivity extends AppCompatActivity {
             data.put("notifyDate", 1);
             data.put("notification", true);
 
-            db.collection("FoodStorage").document(etName.getText().toString().toString() + regTime).set(data);
-//            db.collection("FoodStorage")
-//                    .add(data)
-//                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                        @Override
-//                        public void onSuccess(DocumentReference documentReference) {
-//                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//                            Toast.makeText(context, "성공적으로 추가됐습니다.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Toast.makeText(context, "오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
+            db.collection("FoodStorage").document(etName.getText().toString().toString() + regTime).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+                @Override
+                public void onSuccess(Void unused) {
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    Toast.makeText(context, "성공적으로 추가됐습니다.", Toast.LENGTH_SHORT).show();
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull @NotNull Exception e) {
+                    Toast.makeText(context, "오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
+                }
+            });
+
             regTime++;
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
