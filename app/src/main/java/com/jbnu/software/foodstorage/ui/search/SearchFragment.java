@@ -39,7 +39,7 @@ public class SearchFragment extends Fragment {
         searchItem = root.findViewById(R.id.search_item);
         searchExpiration = root.findViewById(R.id.search_expiration);
         searchExpiration = root.findViewById(R.id.search_expiration);
-//        rvResult = (RecyclerView) root.findViewById(R.id.rv_result_list);
+        rvResult = (RecyclerView) root.findViewById(R.id.rv_result_list);
 
         searchItem.setOnClickListener(new View.OnClickListener() {
             @Override

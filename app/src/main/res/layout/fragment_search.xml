@@ -54,23 +54,23 @@
 
     <!--    </LinearLayout>-->
 
-    <!--    <View-->
-    <!--        android:id="@+id/divider"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="2dp"-->
-    <!--        android:background="#45B3E0E8"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/linearLayout"/>-->
+    <View
+        android:id="@+id/divider"
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="#45B3E0E8"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"/>
 
-    <!--    <androidx.recyclerview.widget.RecyclerView-->
-    <!--        android:id="@+id/rv_result_list"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="@android:color/transparent"-->
-    <!--        android:divider="#ffffff"-->
-    <!--        android:dividerHeight="7dp"-->
-    <!--        android:scrollbars="vertical"-->
-    <!--        app:layout_constraintTop_toBottomOf="@id/divider"-->
-    <!--        android:layout_marginTop="7dp"-->
-    <!--        />-->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_result_list"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="7dp"
+        android:background="@android:color/transparent"
+        android:divider="#ffffff"
+        android:dividerHeight="7dp"
+        android:scrollbars="vertical"
+        app:layout_constraintTop_toBottomOf="@id/divider" />
 
 </LinearLayout>
