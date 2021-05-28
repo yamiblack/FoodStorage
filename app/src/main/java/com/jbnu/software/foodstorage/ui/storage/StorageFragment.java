@@ -7,10 +7,10 @@ import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -34,10 +34,9 @@ import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
 import com.jbnu.software.foodstorage.AlarmReceiver;
 import com.jbnu.software.foodstorage.R;
-import com.jbnu.software.foodstorage.SearchActivity;
-import com.jbnu.software.foodstorage.Storage;
-import com.jbnu.software.foodstorage.StorageNotificationRecyclerViewAdapter;
-import com.jbnu.software.foodstorage.StorageRecyclerViewAdapter;
+import com.jbnu.software.foodstorage.model.Storage;
+import com.jbnu.software.foodstorage.adapter.StorageNotificationRecyclerViewAdapter;
+import com.jbnu.software.foodstorage.adapter.StorageRecyclerViewAdapter;
 
 import java.text.ParseException;
 import java.util.ArrayList;
@@ -147,6 +146,13 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
     public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
         inflater.inflate(R.menu.menu_storage, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        startActivity(new Intent(getActivity(), AddStorageActivity.class));
+
+        return super.onOptionsItemSelected(item);
     }
 
     public void addSpinner() {

@@ -31,6 +31,10 @@ public class LoginActivity extends Activity {
 
         mAuth = FirebaseAuth.getInstance();
 
+        if(mAuth.getCurrentUser() != null) {
+            startActivity(new Intent(getApplication(), MainActivity.class));
+        }
+
         findViewById(R.id.btn_login).setOnClickListener(onClickListener);
         findViewById(R.id.btn_signUp).setOnClickListener(onClickListener);
     }
@@ -97,8 +101,8 @@ public class LoginActivity extends Activity {
         }
     }
 
-    private void startToast(String msg) {
-        Toast.makeText(this, msg, Toast.LENGTH_SHORT).show();
+    private void startToast(String message) {
+        Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
     }
 
     private void finishSignInActivity() {

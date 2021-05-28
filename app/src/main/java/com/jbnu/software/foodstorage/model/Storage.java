@@ -1,4 +1,4 @@
-package com.jbnu.software.foodstorage;
+package com.jbnu.software.foodstorage.model;
 
 
 import java.io.Serializable;
@@ -90,10 +90,24 @@ public class Storage implements Serializable {
     }
 
     public void setExpiration(String expration) {
+        int year, month, day;
         String[] split = expration.split("\\.");
-        int year = Integer.parseInt(split[0]);
-        int month = Integer.parseInt(split[1]);
-        int day = Integer.parseInt(split[2]);
+
+        if(split[0].length() == 2) {
+            split[0] = "20" + split[0];
+        }
+
+        if(split[1].length() == 1) {
+            split[1] = "0" + split[1];
+        }
+
+        if(split[2].length() == 1) {
+            split[2] = "0" + split[2];
+        }
+
+        year = Integer.parseInt(split[0]);
+        month = Integer.parseInt(split[1]);
+        day = Integer.parseInt(split[2]);
 
         //JANUARY = 0
         int dDay = registDDay(year, month-1, day);

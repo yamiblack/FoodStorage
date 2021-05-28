@@ -1,4 +1,4 @@
-package com.jbnu.software.foodstorage;
+package com.jbnu.software.foodstorage.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,6 +6,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
+
+import com.jbnu.software.foodstorage.R;
 
 import java.util.List;
 

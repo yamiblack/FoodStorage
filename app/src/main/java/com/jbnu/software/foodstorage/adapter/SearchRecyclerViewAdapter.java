@@ -1,19 +1,17 @@
-package com.jbnu.software.foodstorage;
+package com.jbnu.software.foodstorage.adapter;
 
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CompoundButton;
-import android.widget.Spinner;
-import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.jbnu.software.foodstorage.R;
+import com.jbnu.software.foodstorage.model.Storage;
 
 import java.util.ArrayList;
 

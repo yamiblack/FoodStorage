@@ -16,9 +16,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 
 import com.jbnu.software.foodstorage.R;
-import com.jbnu.software.foodstorage.SearchActivity;
-import com.jbnu.software.foodstorage.SearchRecyclerViewAdapter;
-import com.jbnu.software.foodstorage.Storage;
+import com.jbnu.software.foodstorage.adapter.SearchRecyclerViewAdapter;
+import com.jbnu.software.foodstorage.model.Storage;
 
 import java.util.ArrayList;
 

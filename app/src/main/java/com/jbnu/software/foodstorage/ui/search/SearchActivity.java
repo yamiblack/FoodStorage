@@ -1,5 +1,6 @@
-package com.jbnu.software.foodstorage;
+package com.jbnu.software.foodstorage.ui.search;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
@@ -21,12 +22,18 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.jbnu.software.foodstorage.MainActivity;
+import com.jbnu.software.foodstorage.R;
+import com.jbnu.software.foodstorage.adapter.SearchRecyclerViewAdapter;
+import com.jbnu.software.foodstorage.model.Storage;
 
 import java.util.ArrayList;
 
 public class SearchActivity extends AppCompatActivity {
     private static int TYPE_ITEM = 3;
     private static int TYPE_EXPIRATION = 4;
+
+    private Context context = this;
 
     private EditText editSearch;
     private Button btnResult;
@@ -47,6 +54,7 @@ public class SearchActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
+        getSupportActionBar().setTitle("식품 검색");
 
         arrayListDB = new ArrayList<Storage>();
 //        testlist = new Storage();
@@ -83,7 +91,12 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCallback(ArrayList<Storage> eventList) {
                 arrayListDB.addAll(eventList);
-                searchList.addAll(arrayListDB);
+                if(arrayListDB.isEmpty()) {
+                    Toast.makeText(context, "현재 냉장고에 아무것도 없어요", Toast.LENGTH_SHORT).show();
+                } else {
+                    searchList.addAll(arrayListDB);
+                }
+
                 Log.e("TAG123", arrayListDB.get(0).getName());
             }
         });
@@ -196,7 +209,10 @@ public class SearchActivity extends AppCompatActivity {
                     }
                     adapter.notifyDataSetChanged();
 
-                    myCallback.onCallback(eventList);
+                    if(!eventList.isEmpty()) {
+                        myCallback.onCallback(eventList);
+                    }
+
                 }
 
             }

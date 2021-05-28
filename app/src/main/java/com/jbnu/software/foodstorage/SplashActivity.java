@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 
 import com.google.firebase.auth.FirebaseAuth;
+import com.jbnu.software.foodstorage.R;
 import com.jbnu.software.foodstorage.ui.membership.LoginActivity;
 
 public class SplashActivity extends Activity {
@@ -15,16 +16,11 @@ public class SplashActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_splash);
 
-
         Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                if (FirebaseAuth.getInstance().getCurrentUser() == null) {
-                    startActivity(new Intent((getApplication()), LoginActivity.class));
-                } else {
-                    startActivity(new Intent((getApplication()), MainActivity.class));
-                }
+                startActivity(new Intent(getApplication(), LoginActivity.class));
             }
         }, SPLASH_TIME);
 
