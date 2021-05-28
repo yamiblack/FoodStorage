@@ -93,15 +93,15 @@ public class Storage implements Serializable {
         int year, month, day;
         String[] split = expration.split("\\.");
 
-        if(split[0].length() == 2) {
+        if (split[0].length() == 2) {
             split[0] = "20" + split[0];
         }
 
-        if(split[1].length() == 1) {
+        if (split[1].length() == 1) {
             split[1] = "0" + split[1];
         }
 
-        if(split[2].length() == 1) {
+        if (split[2].length() == 1) {
             split[2] = "0" + split[2];
         }
 
@@ -110,7 +110,7 @@ public class Storage implements Serializable {
         day = Integer.parseInt(split[2]);
 
         //JANUARY = 0
-        int dDay = registDDay(year, month-1, day);
+        int dDay = registDDay(year, month - 1, day);
         String sDDay = Integer.toString(dDay);
         setDDay(dDay);
 
@@ -124,13 +124,13 @@ public class Storage implements Serializable {
             Calendar toDay = Calendar.getInstance();
             Calendar dday = Calendar.getInstance();
 
-            dday.set(year, month,day);
+            dday.set(year, month, day);
 
-            long ldday  = dday.getTimeInMillis() / (24*60*60*1000);
-            long ltoday = toDay.getTimeInMillis() / (24*60*60*1000);
+            long ldday = dday.getTimeInMillis() / (24 * 60 * 60 * 1000);
+            long ltoday = toDay.getTimeInMillis() / (24 * 60 * 60 * 1000);
 
-            long substract =ldday - ltoday;
-            return (int)substract;
+            long substract = ldday - ltoday;
+            return (int) substract;
         } catch (Exception e) {
             return -1;
         }

@@ -1,5 +1,7 @@
 package com.jbnu.software.foodstorage;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.Toast;
 
@@ -12,6 +14,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import com.jbnu.software.foodstorage.databinding.ActivityMainBinding;
+import com.jbnu.software.foodstorage.ui.tutorial.TutorialActivity;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -30,6 +33,14 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("isNew", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        if (sharedPreferences.getBoolean("isNew", true)) {
+
+            Intent intent = new Intent(this, TutorialActivity.class);
+            startActivity(intent);
+        }
     }
 
     @Override

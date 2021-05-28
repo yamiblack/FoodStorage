@@ -92,7 +92,6 @@ public class AddStorageActivity extends AppCompatActivity {
             regTime++;
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
         }
-//        startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
         return super.onOptionsItemSelected(item);
     }

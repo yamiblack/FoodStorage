@@ -50,7 +50,6 @@ import java.util.Map;
 
 public class StorageFragment extends Fragment implements View.OnClickListener {
 
-    // Context context = this;
     private ArrayList<Storage> arrayListDB = new ArrayList<>();
     private RecyclerView rvStorage;
     private StorageRecyclerViewAdapter adapter;
@@ -202,7 +201,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
                 setStorageListDB(arrayListDB.get(position), 2);
                 Intent intent = new Intent(getActivity(), EvaluateActivity.class);
                 intent.putExtra("product", arrayListDB.get(position).getName());
-                arrayListDB.remove(position);
+
                 itemCount.setText(Integer.toString(arrayListDB.size()));
                 Log.e("name dd", arrayListDB.get(position).getName());
                 adapter.notifyDataSetChanged();
@@ -217,7 +216,6 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
                 itemCount.setText(Integer.toString(arrayListDB.size()));
                 adapter.notifyDataSetChanged();
                 Log.e("position", String.valueOf(position));
-
             }
         });
 
@@ -311,34 +309,6 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
             Log.e("e", "" + storage.getRegTime());
         }
     }
-
-//    public void setTestListDB() {
-//            Map<String, Object> data = new HashMap<>();
-//            data.put("email", auth.getCurrentUser().getEmail());
-//            data.put("name", "우유");
-//            data.put("amount", 3);
-//         //   data.put("dDay", 6);
-//            data.put("regTime", 2);
-//            data.put("notifyDate", 1);
-//            data.put("expanded", false);
-//            data.put("notification", true);
-//            data.put("expiration", "2021.05.30");
-//
-//            db.collection("FoodStorage").document("우유").set(data);
-////                    .add(data)
-////                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-////                        @Override
-////                        public void onSuccess(DocumentReference documentReference) {
-////                        }
-////                    })
-////                    .addOnFailureListener(new OnFailureListener() {
-////                        @Override
-////                        public void onFailure(@NonNull Exception e) {
-////                        }
-////                    });
-//
-//
-//    }
 
     @Override
     public void onClick(View v) {

@@ -17,6 +17,7 @@
         android:fontFamily="@font/nanumsquarebold"
         android:textSize="20sp"
         android:lineSpacingExtra="10sp"
+        android:background="@color/transparent"
         android:text="상품은 어떠셨나요? \n 재구매하시겠어요?"
         android:textColor="@color/white"/>
 
@@ -25,7 +26,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="center">
+        android:layout_gravity="center"
+        android:background="@color/transparent">
 
         <Button
             android:id="@+id/btn_like"
@@ -39,10 +41,6 @@
             android:layout_height="100dp"
             android:layout_marginLeft="30dp"
             android:background="@drawable/ic_dislike"/>
-
     </LinearLayout>
-
-
-
 
 </LinearLayout>

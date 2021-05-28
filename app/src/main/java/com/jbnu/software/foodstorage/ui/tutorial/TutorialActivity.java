@@ -1,7 +1,10 @@
 package com.jbnu.software.foodstorage.ui.tutorial;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -13,19 +16,35 @@ public class TutorialActivity extends AppCompatActivity {
 
     private Context context = this;
 
-    private FirebaseFirestore db;
-    private FirebaseAuth auth;
-
-    private static int regTime = 0;
+    TextView tvGuideClose;
+    TextView tvGuidCloseForever;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_storage_add);
+        setContentView(R.layout.activity_tutorial);
 
-        db = FirebaseFirestore.getInstance();
-        auth = FirebaseAuth.getInstance();
+        tvGuideClose = (TextView) findViewById(R.id.tv_guideClose);
+        tvGuidCloseForever = (TextView) findViewById(R.id.tv_guideCloseForever);
 
+        SharedPreferences sharedPreferences = getSharedPreferences("isNew", MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+
+        tvGuideClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
+
+        tvGuidCloseForever.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                editor.putBoolean("isNew", false);
+                editor.apply();
+                finish();
+            }
+        });
     }
 
 }

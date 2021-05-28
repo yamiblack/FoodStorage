@@ -62,7 +62,7 @@ public class RepurchaseListActivity extends AppCompatActivity {
                 if (task.isSuccessful()) {
                     for (QueryDocumentSnapshot documentSnapshot : task.getResult()) {
                         if (documentSnapshot.get("email").equals(auth.getCurrentUser().getEmail())) {
-                          Repurchase repurchase = documentSnapshot.toObject(Repurchase.class);
+                            Repurchase repurchase = documentSnapshot.toObject(Repurchase.class);
                             arrayList.add(repurchase);
                         }
                     }

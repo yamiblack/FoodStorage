@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/navigation_music"
         android:name="com.jbnu.software.foodstorage.ui.music.MusicFragment"
-        android:label="음악"
+        android:label="요리할 때 듣는 음악"
         tools:layout="@layout/fragment_music" />
 
     <fragment
@@ -28,6 +28,5 @@
         android:name="com.jbnu.software.foodstorage.ui.mypage.MyPageFragment"
         android:label="마이페이지"
         tools:layout="@layout/fragment_mypage" />
-
 
 </navigation>

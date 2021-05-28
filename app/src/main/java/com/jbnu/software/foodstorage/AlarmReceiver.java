@@ -23,7 +23,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        AlarmManager am = (AlarmManager)context.getSystemService(Context.ALARM_SERVICE);
+        AlarmManager am = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
 
         String name = intent.getExtras().getString("name");
         int id = intent.getExtras().getInt("ID");
@@ -31,8 +31,8 @@ public class AlarmReceiver extends BroadcastReceiver {
         boolean isOn = intent.getExtras().getBoolean("isOn");
 
         builder = null;
-        manager = (NotificationManager)context.getSystemService(Context.NOTIFICATION_SERVICE);
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.O){
+        manager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             manager.createNotificationChannel(
                     new NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
             );
@@ -43,7 +43,7 @@ public class AlarmReceiver extends BroadcastReceiver {
 
         //알림창 클릭 시 activity 화면 부름
         Intent intent2 = new Intent(context, MainActivity.class);
-        PendingIntent pendingIntent = PendingIntent.getActivity(context,101,intent2, PendingIntent.FLAG_UPDATE_CURRENT);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 101, intent2, PendingIntent.FLAG_UPDATE_CURRENT);
 
         //알림창 제목
         builder.setContentTitle("유통기한이 임박한 품목이있어요!");
@@ -58,7 +58,7 @@ public class AlarmReceiver extends BroadcastReceiver {
         Notification notification = builder.build();
         manager.notify(id, notification);
 
-        if(!isOn)
+        if (!isOn)
             manager.cancel(id);
 
     }

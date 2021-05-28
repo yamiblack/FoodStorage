@@ -31,7 +31,7 @@ public class LoginActivity extends Activity {
 
         mAuth = FirebaseAuth.getInstance();
 
-        if(mAuth.getCurrentUser() != null) {
+        if (mAuth.getCurrentUser() != null) {
             startActivity(new Intent(getApplication(), MainActivity.class));
         }
 

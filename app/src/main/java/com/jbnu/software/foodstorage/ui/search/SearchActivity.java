@@ -57,25 +57,6 @@ public class SearchActivity extends AppCompatActivity {
         getSupportActionBar().setTitle("식품 검색");
 
         arrayListDB = new ArrayList<Storage>();
-//        testlist = new Storage();
-//        testlist.setName("우유");
-//        testlist.setAmount(1);
-//        testlist.setExpiration(2021, 05, 24);
-//        testlist.setRegTime(3);
-//        dbArrayList.add(testlist);
-//        testlist = new Storage();
-//        testlist.setName("콜라");
-//        testlist.setAmount(3);
-//        testlist.setExpiration(2021, 05, 24);
-//        testlist.setRegTime(2);
-//        dbArrayList.add(testlist);
-//        testlist = new Storage();
-//        testlist.setName("냉동삼겹살");
-//        testlist.setAmount(5);
-//        testlist.setExpiration(2022, 07, 23);
-//        testlist.setRegTime(1);
-//        testlist.setNotification(false);
-//        dbArrayList.add(testlist);
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
@@ -91,7 +72,7 @@ public class SearchActivity extends AppCompatActivity {
             @Override
             public void onCallback(ArrayList<Storage> eventList) {
                 arrayListDB.addAll(eventList);
-                if(arrayListDB.isEmpty()) {
+                if (arrayListDB.isEmpty()) {
                     Toast.makeText(context, "현재 냉장고에 아무것도 없어요", Toast.LENGTH_SHORT).show();
                 } else {
                     searchList.addAll(arrayListDB);
@@ -209,7 +190,7 @@ public class SearchActivity extends AppCompatActivity {
                     }
                     adapter.notifyDataSetChanged();
 
-                    if(!eventList.isEmpty()) {
+                    if (!eventList.isEmpty()) {
                         myCallback.onCallback(eventList);
                     }
 
