@@ -1,10 +1,12 @@
-package com.jbnu.software.foodstorage;
+package com.jbnu.software.foodstorage.service;
 
 import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
 import android.util.Log;
+
+import com.jbnu.software.foodstorage.R;
 
 public class MusicService extends Service {
     MediaPlayer mediaPlayer;

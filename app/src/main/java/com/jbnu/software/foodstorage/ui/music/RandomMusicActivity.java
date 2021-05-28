@@ -1,23 +1,14 @@
 package com.jbnu.software.foodstorage.ui.music;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.view.View;
 import android.widget.ToggleButton;
 
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.navigation.NavController;
-import androidx.navigation.Navigation;
-import androidx.navigation.ui.AppBarConfiguration;
-import androidx.navigation.ui.NavigationUI;
 
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-import com.jbnu.software.foodstorage.MusicService;
+import com.jbnu.software.foodstorage.service.MusicService;
 import com.jbnu.software.foodstorage.R;
-import com.jbnu.software.foodstorage.ui.tutorial.TutorialActivity;
 
 public class RandomMusicActivity extends AppCompatActivity {
     private ToggleButton toggleButtonMusic;

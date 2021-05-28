@@ -1,4 +1,4 @@
-package com.jbnu.software.foodstorage;
+package com.jbnu.software.foodstorage.receiver;
 
 import android.app.AlarmManager;
 import android.app.Notification;
@@ -12,6 +12,9 @@ import android.os.Build;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
+
+import com.jbnu.software.foodstorage.MainActivity;
+import com.jbnu.software.foodstorage.R;
 
 public class AlarmReceiver extends BroadcastReceiver {
     NotificationManager manager;

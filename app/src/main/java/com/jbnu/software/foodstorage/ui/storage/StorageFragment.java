@@ -33,7 +33,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
-import com.jbnu.software.foodstorage.AlarmReceiver;
+import com.jbnu.software.foodstorage.receiver.AlarmReceiver;
 import com.jbnu.software.foodstorage.R;
 import com.jbnu.software.foodstorage.model.Storage;
 import com.jbnu.software.foodstorage.adapter.StorageNotificationRecyclerViewAdapter;
@@ -201,9 +201,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
                 setStorageListDB(arrayListDB.get(position), 2);
                 Intent intent = new Intent(getActivity(), EvaluateActivity.class);
                 intent.putExtra("product", arrayListDB.get(position).getName());
-
                 itemCount.setText(Integer.toString(arrayListDB.size()));
-                Log.e("name dd", arrayListDB.get(position).getName());
                 adapter.notifyDataSetChanged();
                 startActivity(intent);
             }

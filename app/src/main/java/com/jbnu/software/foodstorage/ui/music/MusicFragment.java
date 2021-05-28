@@ -21,17 +21,14 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
-import com.jbnu.software.foodstorage.MusicService;
 import com.jbnu.software.foodstorage.R;
-import com.jbnu.software.foodstorage.ui.storage.AddStorageActivity;
-
-import static android.content.Context.MODE_PRIVATE;
 
 public class MusicFragment extends Fragment {
 
     TextView musicTitle;
     ImageButton btnPlay;
     ImageButton btnNext;
+
     ImageButton btnBack;
     ListView listView;
     ArrayAdapter adapter;
@@ -99,7 +96,7 @@ public class MusicFragment extends Fragment {
                     mediaPlayer = MediaPlayer.create(getActivity(), musicArray[index]);
                     mediaPlayer.start();
                 } else {
-                    Toast.makeText(getActivity(), "재생중아님", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "재생 중 아님", Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -120,7 +117,7 @@ public class MusicFragment extends Fragment {
                     mediaPlayer = MediaPlayer.create(getActivity(), musicArray[index]);
                     mediaPlayer.start();
                 } else {
-                    Toast.makeText(getActivity(), "재생중아님", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(), "재생 중 아님", Toast.LENGTH_LONG).show();
                 }
             }
         });

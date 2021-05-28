@@ -37,10 +37,10 @@
             </intent-filter>
         </activity>
 
-        <service android:name="MusicService" />
+        <service android:name=".service.MusicService" />
 
         <receiver
-            android:name=".AlarmReceiver"
+            android:name=".receiver.AlarmReceiver"
             android:enabled="true"
             android:exported="false">
             <intent-filter>
