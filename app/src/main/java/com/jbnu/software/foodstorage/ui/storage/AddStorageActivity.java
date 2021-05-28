@@ -63,7 +63,8 @@ public class AddStorageActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-        if (etName.getText().toString().length() == 0 || etAmount.getText().toString().length() == 0 || etExpirationDate.getText().toString().length() == 0) {
+        if (etName.getText().toString().length() == 0 || etAmount.getText().toString().length() == 0
+                || etExpirationDate.getText().toString().length() == 0) {
             Toast.makeText(context, "양식을 모두 채워주세요.", Toast.LENGTH_SHORT).show();
         } else {
             Map<String, Object> data = new HashMap<>();
@@ -76,7 +77,8 @@ public class AddStorageActivity extends AppCompatActivity {
             data.put("notifyDate", 1);
             data.put("notification", true);
 
-            db.collection("FoodStorage").document(etName.getText().toString().toString() + regTime).set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
+            db.collection("FoodStorage").document(etName.getText().toString().toString() + regTime)
+                    .set(data).addOnSuccessListener(new OnSuccessListener<Void>() {
                 @Override
                 public void onSuccess(Void unused) {
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
