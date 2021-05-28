@@ -98,7 +98,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
                     for (int i = 0; i < arrayListDB.size(); i++) {
                         if (arrayListDB.get(i).isNotification())
                             setAlarm(arrayListDB.get(i));
-                            setStorageListDB(arrayListDB.get(i), 1);
+                        setStorageListDB(arrayListDB.get(i), 1);
                     }
                     addSpinner();
 
@@ -200,9 +200,13 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
             @Override
             public void onClearClick(View v, int position) {
                 setStorageListDB(arrayListDB.get(position), 2);
+                Intent intent = new Intent(getActivity(), EvaluateActivity.class);
+                intent.putExtra("product", arrayListDB.get(position).getName());
                 arrayListDB.remove(position);
                 itemCount.setText(Integer.toString(arrayListDB.size()));
+                Log.e("name dd", arrayListDB.get(position).getName());
                 adapter.notifyDataSetChanged();
+                startActivity(intent);
             }
 
             @Override
@@ -212,6 +216,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
                 arrayListDB.get(position).setExpanded(false);
                 itemCount.setText(Integer.toString(arrayListDB.size()));
                 adapter.notifyDataSetChanged();
+                Log.e("position", String.valueOf(position));
 
             }
         });
@@ -289,23 +294,22 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
         });
     }
 
-        public void setStorageListDB(Storage storage, int flag) {
-            if(flag == 1) {
-                Map<String, Object> data = new HashMap<>();
-                data.put("email", storage.getEmail());
-                data.put("name", storage.getName());
-                data.put("amount", storage.getAmount());
-                data.put("regTime", storage.getRegTime());
-                data.put("notification", storage.isNotification());
-                data.put("notifyDate", storage.getNotifyDate());
-                data.put("expiration", storage.getExpiration());
+    public void setStorageListDB(Storage storage, int flag) {
+        if (flag == 1) {
+            Map<String, Object> data = new HashMap<>();
+            data.put("email", storage.getEmail());
+            data.put("name", storage.getName());
+            data.put("amount", storage.getAmount());
+            data.put("regTime", storage.getRegTime());
+            data.put("notification", storage.isNotification());
+            data.put("notifyDate", storage.getNotifyDate());
+            data.put("expiration", storage.getExpiration());
 
-                db.collection("FoodStorage").document(storage.getName() + storage.getRegTime()).set(data);
-            }
-            else if (flag == 2) {
-                db.collection("FoodStorage").document(storage.getName() + storage.getRegTime()).delete();
-                Log.e("e", ""+storage.getRegTime());
-            }
+            db.collection("FoodStorage").document(storage.getName() + storage.getRegTime()).set(data);
+        } else if (flag == 2) {
+            db.collection("FoodStorage").document(storage.getName() + storage.getRegTime()).delete();
+            Log.e("e", "" + storage.getRegTime());
+        }
     }
 
 //    public void setTestListDB() {

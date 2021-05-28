@@ -76,6 +76,7 @@ public class StorageRecyclerViewAdapter extends RecyclerView.Adapter<StorageRecy
         Button increment;
         Button decrement;
         Button clear;
+
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
 
@@ -110,14 +111,14 @@ public class StorageRecyclerViewAdapter extends RecyclerView.Adapter<StorageRecy
             clear.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                        int position = getAdapterPosition();
+                    int position = getAdapterPosition();
 
-                        if(position != RecyclerView.NO_POSITION){
-                            if(mListener !=null){
-                                mListener.onClearClick(v,position);
-                                notifyItemChanged(position);
-                            }
+                    if (position != RecyclerView.NO_POSITION) {
+                        if (mListener != null) {
+                            mListener.onClearClick(v, position);
+                            notifyItemChanged(position);
                         }
+                    }
                 }
             });
 
@@ -126,9 +127,9 @@ public class StorageRecyclerViewAdapter extends RecyclerView.Adapter<StorageRecy
                 public void onClick(View v) {
                     int position = getAdapterPosition();
 
-                    if(position != RecyclerView.NO_POSITION){
-                        if(mListener !=null){
-                            mListener.onCheckClick(v,position);
+                    if (position != RecyclerView.NO_POSITION) {
+                        if (mListener != null) {
+                            mListener.onCheckClick(v, position);
                             notifyItemChanged(position);
                         }
                     }
@@ -157,6 +158,7 @@ public class StorageRecyclerViewAdapter extends RecyclerView.Adapter<StorageRecy
 
     public interface OnItemClickListener {
         void onClearClick(View v, int position);
+
         void onCheckClick(View v, int position);
     }
 

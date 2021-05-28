@@ -16,6 +16,15 @@
         <activity android:name=".ui.membership.SignupActivity" />
         <activity android:name=".ui.search.SearchActivity" />
         <activity android:name=".ui.storage.AddStorageActivity" />
+        <activity android:name=".ui.mypage.RepurchaseListActivity" />
+        <activity
+            android:name=".ui.tutorial.TutorialActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
+        <activity
+            android:name=".ui.storage.EvaluateActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Transparent" />
 
         <activity
             android:name=".SplashActivity"

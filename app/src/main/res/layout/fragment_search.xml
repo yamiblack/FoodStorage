@@ -8,17 +8,6 @@
     tools:context=".ui.search.SearchFragment">
 
 
-    <!--    <LinearLayout-->
-    <!--        android:id="@+id/linearLayout"-->
-    <!--        android:layout_width="match_parent"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:gravity="center"-->
-    <!--        android:orientation="horizontal"-->
-    <!--        android:padding="20dp"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent">-->
-
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
@@ -52,15 +41,13 @@
         android:text="유통기한 검색"
         android:textColor="@color/white" />
 
-    <!--    </LinearLayout>-->
-
     <View
         android:id="@+id/divider"
         android:layout_width="match_parent"
         android:layout_height="2dp"
-        android:background="#45B3E0E8"
         android:layout_marginTop="10dp"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:background="#45B3E0E8" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_result_list"

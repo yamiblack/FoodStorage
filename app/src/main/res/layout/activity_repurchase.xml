@@ -1,67 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/white"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    tools:context=".ui.mypage.MyPageFragment">
 
-    <LinearLayout
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="100dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/ic_cart" />
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_repurchase"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:padding="10dp">
-
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="50dp"
-            android:adjustViewBounds="true"
-            android:background="@drawable/ic_foods" />
-
-        <EditText
-            android:id="@+id/et_name"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="15dp"
-            android:singleLine="true"
-            android:backgroundTint="@color/primaryColor"
-            android:fontFamily="@font/nanumsquareregular"
-            android:hint="식품명 입력"
-            android:textColor="@color/primaryColor"
-            android:textColorHint="@color/primaryColor" />
-
-        <EditText
-            android:id="@+id/et_amount"
-            android:layout_width="match_parent"
-            android:singleLine="true"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="15dp"
-            android:backgroundTint="@color/primaryColor"
-            android:hint="식품 개수 입력(숫자만 입력)"
-            android:inputType="number"
-            android:textColor="@color/primaryColor"
-            android:textColorHint="@color/primaryColor" />
-
-        <EditText
-            android:id="@+id/et_expirationDate"
-            android:layout_width="match_parent"
-            android:singleLine="true"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="5dp"
-            android:layout_marginEnd="5dp"
-            android:layout_marginBottom="5dp"
-            android:backgroundTint="@color/primaryColor"
-            android:hint="유통기한 입력(ex. 2021.05.31)"
-            android:textColor="@color/primaryColor"
-            android:textColorHint="@color/primaryColor" />
-
-
-    </LinearLayout>
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="70dp"
+        android:background="@android:color/transparent"
+        android:divider="#ffffff"
+        android:dividerHeight="7dp"
+        android:scrollbars="vertical" />
 
 </LinearLayout>
