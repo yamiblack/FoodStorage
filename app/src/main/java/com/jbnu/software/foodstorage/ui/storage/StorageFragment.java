@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.icu.text.SimpleDateFormat;
 import android.os.Build;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -240,7 +241,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(getActivity(), storage.getRegTime(), receiverIntent, 0);
 
         String from = storage.getExpiration() + " 16:00:00";
-        // "2020.05.23 10:31:00"; //임의로 날짜와 시간을 지정
+        // "2021.05.23 10:31:00"; //임의로 날짜와 시간을 지정
 
         //날짜 포맷을 바꿔주는 소스코드
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm:ss");
@@ -303,6 +304,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
             }
             else if (flag == 2) {
                 db.collection("FoodStorage").document(storage.getName() + storage.getRegTime()).delete();
+                Log.e("e", ""+storage.getRegTime());
             }
     }
 
