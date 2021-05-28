@@ -50,7 +50,7 @@ import java.util.Map;
 public class StorageFragment extends Fragment implements View.OnClickListener {
 
     // Context context = this;
-    private ArrayList<Storage> arrayListDB;
+    private ArrayList<Storage> arrayListDB = new ArrayList<>();
     private RecyclerView rvStorage;
     private StorageRecyclerViewAdapter adapter;
     private StorageNotificationRecyclerViewAdapter nAdapter;
@@ -76,7 +76,7 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
 
         auth = FirebaseAuth.getInstance();
         db = FirebaseFirestore.getInstance();
-        arrayListDB = new ArrayList<>();
+//        arrayListDB = new ArrayList<>();
 
         readData(new MyCallback() {
             @Override
@@ -99,13 +99,10 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
                             setAlarm(arrayListDB.get(i));
                             setStorageListDB(arrayListDB.get(i), 1);
                     }
-
-                    getStorageList();
                     addSpinner();
 
                 } else {
                     fab.setImageResource(R.drawable.check_mark_white);
-                    getNotifyList();
                     addSpinner();
                 }
 
@@ -203,7 +200,6 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
             public void onClearClick(View v, int position) {
                 setStorageListDB(arrayListDB.get(position), 2);
                 arrayListDB.remove(position);
-
                 itemCount.setText(Integer.toString(arrayListDB.size()));
                 adapter.notifyDataSetChanged();
             }
@@ -213,7 +209,6 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
                 arrayListDB.get(position).setAmount(adapter.getExAmount());
                 setStorageListDB(arrayListDB.get(position), 1);
                 arrayListDB.get(position).setExpanded(false);
-
                 itemCount.setText(Integer.toString(arrayListDB.size()));
                 adapter.notifyDataSetChanged();
 
@@ -342,8 +337,14 @@ public class StorageFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-
             case R.id.fab_notification:
+                readData(new MyCallback() {
+                    @Override
+                    public void onCallback(ArrayList<Storage> eventList) {
+                        itemCount.setText(Integer.toString(arrayListDB.size()));
+                        addSpinner();
+                    }
+                });
                 isNotifyView = !isNotifyView;
                 break;
         }

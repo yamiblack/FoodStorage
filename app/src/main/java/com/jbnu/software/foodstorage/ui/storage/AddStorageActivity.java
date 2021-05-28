@@ -34,7 +34,7 @@ public class AddStorageActivity extends AppCompatActivity {
     private FirebaseFirestore db;
     private FirebaseAuth auth;
 
-    private int regTime = 0;
+    private static int regTime = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,42 +58,42 @@ public class AddStorageActivity extends AppCompatActivity {
         return true;
     }
 
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
 
-//        if (etName.getText().toString().length() == 0 || etAmount.getText().toString().length() == 0 || etExpirationDate.getText().toString().length() == 0) {
-//            Toast.makeText(context, "양식을 모두 채워주세요.", Toast.LENGTH_SHORT).show();
-//        } else {
-//            Map<String, Object> data = new HashMap<>();
-//            data.put("name", etName.getText().toString());
-//            data.put("expiration", etExpirationDate.getText().toString());
-//            data.put("email", auth.getCurrentUser().getEmail());
-//            data.put("amount", etAmount.getText().toString());
-//            data.put("regTime", String.valueOf(regTime));
-//            data.put("notifyDate", String.valueOf(1));
-////            data.put("notification", "true");
-//            regTime++;
-//
-//            db.collection("FoodStorage")
-//                    .add(data)
-//                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-//                        @Override
-//                        public void onSuccess(DocumentReference documentReference) {
-//                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//                            Toast.makeText(context, "성공적으로 추가됐습니다.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    })
-//                    .addOnFailureListener(new OnFailureListener() {
-//                        @Override
-//                        public void onFailure(@NonNull Exception e) {
-//                            Toast.makeText(context, "오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
-//                        }
-//                    });
-//
-//            startActivity(new Intent(getApplicationContext(), MainActivity.class));
-//        }
-        startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        if (etName.getText().toString().length() == 0 || etAmount.getText().toString().length() == 0 || etExpirationDate.getText().toString().length() == 0) {
+            Toast.makeText(context, "양식을 모두 채워주세요.", Toast.LENGTH_SHORT).show();
+        } else {
+            Map<String, Object> data = new HashMap<>();
+            data.put("name", etName.getText().toString());
+            String expirationDate = etExpirationDate.getText().toString();
+            data.put("expiration", expirationDate.replaceAll(" ", ""));
+            data.put("email", auth.getCurrentUser().getEmail());
+            data.put("amount", Integer.parseInt(etAmount.getText().toString()));
+            data.put("regTime", regTime);
+            data.put("notifyDate", 1);
+            data.put("notification", true);
+            regTime++;
+
+            db.collection("FoodStorage")
+                    .add(data)
+                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                        @Override
+                        public void onSuccess(DocumentReference documentReference) {
+                            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                            Toast.makeText(context, "성공적으로 추가됐습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Toast.makeText(context, "오류가 발생했습니다.", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+
+            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+        }
+//        startActivity(new Intent(getApplicationContext(), MainActivity.class));
 
         return super.onOptionsItemSelected(item);
     }
