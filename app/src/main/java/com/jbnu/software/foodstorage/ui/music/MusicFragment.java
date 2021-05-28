@@ -1,10 +1,14 @@
 package com.jbnu.software.foodstorage.ui.music;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -17,7 +21,9 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
+import com.jbnu.software.foodstorage.MusicService;
 import com.jbnu.software.foodstorage.R;
+import com.jbnu.software.foodstorage.ui.storage.AddStorageActivity;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -37,6 +43,7 @@ public class MusicFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_music, container, false);
+        setHasOptionsMenu(true);
 
         adapter = new ArrayAdapter(getActivity(),
                 android.R.layout.simple_list_item_1, musicListName);
@@ -121,6 +128,7 @@ public class MusicFragment extends Fragment {
         btnPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
                     btnPlay.setImageResource(R.drawable.ic_play);
@@ -146,6 +154,18 @@ public class MusicFragment extends Fragment {
         editor.putInt("CurrentMusic", musicstate);
         editor.commit();
         mediaPlayer.pause();
+    }
+
+    @Override
+    public void onCreateOptionsMenu(@NonNull Menu menu, @NonNull MenuInflater inflater) {
+        super.onCreateOptionsMenu(menu, inflater);
+        inflater.inflate(R.menu.menu_music, menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        startActivity(new Intent(getActivity(), RandomMusicActivity.class));
+        return super.onOptionsItemSelected(item);
     }
 
 }

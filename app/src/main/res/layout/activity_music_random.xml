@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="200dp"
+        android:adjustViewBounds="true"
+        android:background="@drawable/ic_music" />
+
+    <ToggleButton
+        android:id="@+id/toggleMusic"
+        android:layout_width="match_parent"
+        android:layout_gravity="center"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:background="@drawable/button_blue_rounded"
+        android:textColor="@color/white"
+        android:fontFamily="@font/nanumsquarebold"
+        android:gravity="center"
+        android:soundEffectsEnabled="false"
+        android:textAllCaps="false"
+        android:textOff="랜덤 재생 ON"
+        android:textOn="랜덤 재생 OFF" />
+
+</LinearLayout>

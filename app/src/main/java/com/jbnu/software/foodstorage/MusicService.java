@@ -4,6 +4,7 @@ import android.app.Service;
 import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.IBinder;
+import android.util.Log;
 
 public class MusicService extends Service {
     MediaPlayer mediaPlayer;
@@ -17,8 +18,30 @@ public class MusicService extends Service {
     public void onCreate() {
         super.onCreate();
 
-        mediaPlayer = MediaPlayer.create(this, R.raw.bgm1);
+        int min = 0;
+        int max = 4;
+        int randomNumber = (int) ((Math.random() * (max - min)) + min);
+        Log.e("random", String.valueOf(randomNumber));
+        switch (randomNumber) {
+            case 0:
+                mediaPlayer = MediaPlayer.create(this, R.raw.bgm2);
+                break;
+            case 1:
+                mediaPlayer = MediaPlayer.create(this, R.raw.classic1);
+                break;
+            case 2:
+                mediaPlayer = MediaPlayer.create(this, R.raw.classic2);
+                break;
+            case 3:
+                mediaPlayer = MediaPlayer.create(this, R.raw.piano1);
+                break;
+            case 4:
+                mediaPlayer = MediaPlayer.create(this, R.raw.piano2);
+                break;
+        }
+
         mediaPlayer.setLooping(false);
+
     }
 
     @Override
